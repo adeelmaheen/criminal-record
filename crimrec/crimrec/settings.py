@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qx30mqau092l^z08!)t6gxlc=fag!@o=r^wkfxsbqz(+u@0d9i'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-qx30mqau092l^z08!)t6gxlc=fag!@o=r^wkfxsbqz(+u@0d9i')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -129,22 +129,47 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Add to the bottom of settings.py
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': os.getenv('LOG_LEVEL', 'INFO'),
             'class': 'logging.FileHandler',
             'filename': 'debug.log',
+            'formatter': 'verbose',
         },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
     },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'scraper': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }

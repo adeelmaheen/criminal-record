@@ -1,0 +1,768 @@
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); (params None)
+(0.016) CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); args=None; alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+(0.015) CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); args=None; alias=default
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params ())
+(0.000) CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('contenttypes', '0001_initial', '2025-07-12 19:19:37.056937') RETURNING "django_migrations"."id"; args=('contenttypes', '0001_initial', '2025-07-12 19:19:37.056937'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL); (params None)
+(0.000) CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL); args=None; alias=default
+CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); (params None)
+(0.000) CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); args=None; alias=default
+CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED); args=None; alias=default
+CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); (params None)
+(0.000) CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); args=None; alias=default
+CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED); args=None; alias=default
+CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED); args=None; alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params ())
+(0.000) CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); args=(); alias=default
+CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id"); args=(); alias=default
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); (params ())
+(0.000) CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); args=(); alias=default
+CREATE INDEX "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id"); (params ())
+(0.000) CREATE INDEX "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id"); args=(); alias=default
+CREATE INDEX "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id"); (params ())
+(0.000) CREATE INDEX "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id"); args=(); alias=default
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); (params ())
+(0.000) CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); args=(); alias=default
+CREATE INDEX "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id"); (params ())
+(0.000) CREATE INDEX "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id"); args=(); alias=default
+CREATE INDEX "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id"); (params ())
+(0.000) CREATE INDEX "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id"); args=(); alias=default
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); (params ())
+(0.000) CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); args=(); alias=default
+CREATE INDEX "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id"); (params ())
+(0.000) CREATE INDEX "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id"); args=(); alias=default
+CREATE INDEX "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id"); (params ())
+(0.000) CREATE INDEX "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id"); args=(); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0001_initial', '2025-07-12 19:19:37.126685') RETURNING "django_migrations"."id"; args=('auth', '0001_initial', '2025-07-12 19:19:37.126685'); alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); args=None; alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); args=(); alias=default
+CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); args=(); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('admin', '0001_initial', '2025-07-12 19:19:37.173081') RETURNING "django_migrations"."id"; args=('admin', '0001_initial', '2025-07-12 19:19:37.173081'); alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_time" datetime NOT NULL); (params None)
+(0.016) CREATE TABLE "new__django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_time" datetime NOT NULL); args=None; alias=default
+INSERT INTO "new__django_admin_log" ("id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time") SELECT "id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time" FROM "django_admin_log"; (params ())
+(0.000) INSERT INTO "new__django_admin_log" ("id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time") SELECT "id", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id", "action_time" FROM "django_admin_log"; args=(); alias=default
+DROP TABLE "django_admin_log"; (params ())
+(0.000) DROP TABLE "django_admin_log"; args=(); alias=default
+ALTER TABLE "new__django_admin_log" RENAME TO "django_admin_log"; (params ())
+(0.000) ALTER TABLE "new__django_admin_log" RENAME TO "django_admin_log"; args=(); alias=default
+CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); args=(); alias=default
+CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('admin', '0002_logentry_remove_auto_add', '2025-07-12 19:19:37.203086') RETURNING "django_migrations"."id"; args=('admin', '0002_logentry_remove_auto_add', '2025-07-12 19:19:37.203086'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('admin', '0003_logentry_add_action_flag_choices', '2025-07-12 19:19:37.236325') RETURNING "django_migrations"."id"; args=('admin', '0003_logentry_add_action_flag_choices', '2025-07-12 19:19:37.236325'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); (params None)
+(0.000) CREATE TABLE "new__django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); args=None; alias=default
+INSERT INTO "new__django_content_type" ("id", "app_label", "model", "name") SELECT "id", "app_label", "model", "name" FROM "django_content_type"; (params ())
+(0.000) INSERT INTO "new__django_content_type" ("id", "app_label", "model", "name") SELECT "id", "app_label", "model", "name" FROM "django_content_type"; args=(); alias=default
+DROP TABLE "django_content_type"; (params ())
+(0.000) DROP TABLE "django_content_type"; args=(); alias=default
+ALTER TABLE "new__django_content_type" RENAME TO "django_content_type"; (params ())
+(0.000) ALTER TABLE "new__django_content_type" RENAME TO "django_content_type"; args=(); alias=default
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params ())
+(0.000) CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); args=(); alias=default
+ALTER TABLE "django_content_type" DROP COLUMN "name"; (params ())
+(0.000) ALTER TABLE "django_content_type" DROP COLUMN "name"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('contenttypes', '0002_remove_content_type_name', '2025-07-12 19:19:37.293114') RETURNING "django_migrations"."id"; args=('contenttypes', '0002_remove_content_type_name', '2025-07-12 19:19:37.293114'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); (params None)
+(0.000) CREATE TABLE "new__auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); args=None; alias=default
+INSERT INTO "new__auth_permission" ("id", "content_type_id", "codename", "name") SELECT "id", "content_type_id", "codename", "name" FROM "auth_permission"; (params ())
+(0.000) INSERT INTO "new__auth_permission" ("id", "content_type_id", "codename", "name") SELECT "id", "content_type_id", "codename", "name" FROM "auth_permission"; args=(); alias=default
+DROP TABLE "auth_permission"; (params ())
+(0.000) DROP TABLE "auth_permission"; args=(); alias=default
+ALTER TABLE "new__auth_permission" RENAME TO "auth_permission"; (params ())
+(0.000) ALTER TABLE "new__auth_permission" RENAME TO "auth_permission"; args=(); alias=default
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params ())
+(0.000) CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); args=(); alias=default
+CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id"); args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0002_alter_permission_name_max_length', '2025-07-12 19:19:37.338514') RETURNING "django_migrations"."id"; args=('auth', '0002_alter_permission_name_max_length', '2025-07-12 19:19:37.338514'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); (params None)
+(0.000) CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); args=None; alias=default
+INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "first_name", "last_name", "is_staff", "is_active", "date_joined", "email") SELECT "id", "password", "last_login", "is_superuser", "username", "first_name", "last_name", "is_staff", "is_active", "date_joined", "email" FROM "auth_user"; (params ())
+(0.000) INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "first_name", "last_name", "is_staff", "is_active", "date_joined", "email") SELECT "id", "password", "last_login", "is_superuser", "username", "first_name", "last_name", "is_staff", "is_active", "date_joined", "email" FROM "auth_user"; args=(); alias=default
+DROP TABLE "auth_user"; (params ())
+(0.000) DROP TABLE "auth_user"; args=(); alias=default
+ALTER TABLE "new__auth_user" RENAME TO "auth_user"; (params ())
+(0.000) ALTER TABLE "new__auth_user" RENAME TO "auth_user"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0003_alter_user_email_max_length', '2025-07-12 19:19:37.399707') RETURNING "django_migrations"."id"; args=('auth', '0003_alter_user_email_max_length', '2025-07-12 19:19:37.399707'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0004_alter_user_username_opts', '2025-07-12 19:19:37.423318') RETURNING "django_migrations"."id"; args=('auth', '0004_alter_user_username_opts', '2025-07-12 19:19:37.423318'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); (params None)
+(0.000) CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); args=None; alias=default
+INSERT INTO "new__auth_user" ("id", "password", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "last_login") SELECT "id", "password", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "last_login" FROM "auth_user"; (params ())
+(0.000) INSERT INTO "new__auth_user" ("id", "password", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "last_login") SELECT "id", "password", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "last_login" FROM "auth_user"; args=(); alias=default
+DROP TABLE "auth_user"; (params ())
+(0.000) DROP TABLE "auth_user"; args=(); alias=default
+ALTER TABLE "new__auth_user" RENAME TO "auth_user"; (params ())
+(0.016) ALTER TABLE "new__auth_user" RENAME TO "auth_user"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0005_alter_user_last_login_null', '2025-07-12 19:19:37.452163') RETURNING "django_migrations"."id"; args=('auth', '0005_alter_user_last_login_null', '2025-07-12 19:19:37.452163'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0006_require_contenttypes_0002', '2025-07-12 19:19:37.467741') RETURNING "django_migrations"."id"; args=('auth', '0006_require_contenttypes_0002', '2025-07-12 19:19:37.467741'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.016) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0007_alter_validators_add_error_messages', '2025-07-12 19:19:37.497371') RETURNING "django_migrations"."id"; args=('auth', '0007_alter_validators_add_error_messages', '2025-07-12 19:19:37.497371'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(150) NOT NULL UNIQUE); (params None)
+(0.000) CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(150) NOT NULL UNIQUE); args=None; alias=default
+INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "username") SELECT "id", "password", "last_login", "is_superuser", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "username" FROM "auth_user"; (params ())
+(0.000) INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "username") SELECT "id", "password", "last_login", "is_superuser", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "username" FROM "auth_user"; args=(); alias=default
+DROP TABLE "auth_user"; (params ())
+(0.000) DROP TABLE "auth_user"; args=(); alias=default
+ALTER TABLE "new__auth_user" RENAME TO "auth_user"; (params ())
+(0.000) ALTER TABLE "new__auth_user" RENAME TO "auth_user"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0008_alter_user_username_max_length', '2025-07-12 19:19:37.556950') RETURNING "django_migrations"."id"; args=('auth', '0008_alter_user_username_max_length', '2025-07-12 19:19:37.556950'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.031) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_name" varchar(150) NOT NULL); (params None)
+(0.000) CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_name" varchar(150) NOT NULL); args=None; alias=default
+INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "first_name", "email", "is_staff", "is_active", "date_joined", "last_name") SELECT "id", "password", "last_login", "is_superuser", "username", "first_name", "email", "is_staff", "is_active", "date_joined", "last_name" FROM "auth_user"; (params ())
+(0.000) INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "first_name", "email", "is_staff", "is_active", "date_joined", "last_name") SELECT "id", "password", "last_login", "is_superuser", "username", "first_name", "email", "is_staff", "is_active", "date_joined", "last_name" FROM "auth_user"; args=(); alias=default
+DROP TABLE "auth_user"; (params ())
+(0.000) DROP TABLE "auth_user"; args=(); alias=default
+ALTER TABLE "new__auth_user" RENAME TO "auth_user"; (params ())
+(0.000) ALTER TABLE "new__auth_user" RENAME TO "auth_user"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0009_alter_user_last_name_max_length', '2025-07-12 19:19:37.622684') RETURNING "django_migrations"."id"; args=('auth', '0009_alter_user_last_name_max_length', '2025-07-12 19:19:37.622684'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL UNIQUE); (params None)
+(0.016) CREATE TABLE "new__auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL UNIQUE); args=None; alias=default
+INSERT INTO "new__auth_group" ("id", "name") SELECT "id", "name" FROM "auth_group"; (params ())
+(0.000) INSERT INTO "new__auth_group" ("id", "name") SELECT "id", "name" FROM "auth_group"; args=(); alias=default
+DROP TABLE "auth_group"; (params ())
+(0.000) DROP TABLE "auth_group"; args=(); alias=default
+ALTER TABLE "new__auth_group" RENAME TO "auth_group"; (params ())
+(0.000) ALTER TABLE "new__auth_group" RENAME TO "auth_group"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0010_alter_group_name_max_length', '2025-07-12 19:19:37.679387') RETURNING "django_migrations"."id"; args=('auth', '0010_alter_group_name_max_length', '2025-07-12 19:19:37.679387'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0011_update_proxy_permissions', '2025-07-12 19:19:37.716176') RETURNING "django_migrations"."id"; args=('auth', '0011_update_proxy_permissions', '2025-07-12 19:19:37.716176'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "first_name" varchar(150) NOT NULL); (params None)
+(0.000) CREATE TABLE "new__auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "first_name" varchar(150) NOT NULL); args=None; alias=default
+INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "last_name", "email", "is_staff", "is_active", "date_joined", "first_name") SELECT "id", "password", "last_login", "is_superuser", "username", "last_name", "email", "is_staff", "is_active", "date_joined", "first_name" FROM "auth_user"; (params ())
+(0.000) INSERT INTO "new__auth_user" ("id", "password", "last_login", "is_superuser", "username", "last_name", "email", "is_staff", "is_active", "date_joined", "first_name") SELECT "id", "password", "last_login", "is_superuser", "username", "last_name", "email", "is_staff", "is_active", "date_joined", "first_name" FROM "auth_user"; args=(); alias=default
+DROP TABLE "auth_user"; (params ())
+(0.000) DROP TABLE "auth_user"; args=(); alias=default
+ALTER TABLE "new__auth_user" RENAME TO "auth_user"; (params ())
+(0.000) ALTER TABLE "new__auth_user" RENAME TO "auth_user"; args=(); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('auth', '0012_alter_user_first_name_max_length', '2025-07-12 19:19:37.761777') RETURNING "django_migrations"."id"; args=('auth', '0012_alter_user_first_name_max_length', '2025-07-12 19:19:37.761777'); alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "scraper_criminalrecord" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "defendant_name" varchar(255) NOT NULL, "birth_date" date NULL, "sex" varchar(1) NOT NULL, "race" varchar(1) NOT NULL, "case_number" varchar(50) NOT NULL UNIQUE, "date_filed" date NOT NULL, "charges" text NOT NULL, "arrest_citation_date" date NULL, "parish" varchar(100) NOT NULL, "alert_available" bool NOT NULL, "scraped_timestamp" datetime NOT NULL); (params None)
+(0.016) CREATE TABLE "scraper_criminalrecord" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "defendant_name" varchar(255) NOT NULL, "birth_date" date NULL, "sex" varchar(1) NOT NULL, "race" varchar(1) NOT NULL, "case_number" varchar(50) NOT NULL UNIQUE, "date_filed" date NOT NULL, "charges" text NOT NULL, "arrest_citation_date" date NULL, "parish" varchar(100) NOT NULL, "alert_available" bool NOT NULL, "scraped_timestamp" datetime NOT NULL); args=None; alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+CREATE INDEX "scraper_cri_defenda_213135_idx" ON "scraper_criminalrecord" ("defendant_name"); (params ())
+(0.000) CREATE INDEX "scraper_cri_defenda_213135_idx" ON "scraper_criminalrecord" ("defendant_name"); args=(); alias=default
+CREATE INDEX "scraper_cri_case_nu_e9691a_idx" ON "scraper_criminalrecord" ("case_number"); (params ())
+(0.000) CREATE INDEX "scraper_cri_case_nu_e9691a_idx" ON "scraper_criminalrecord" ("case_number"); args=(); alias=default
+CREATE INDEX "scraper_cri_parish_800082_idx" ON "scraper_criminalrecord" ("parish"); (params ())
+(0.000) CREATE INDEX "scraper_cri_parish_800082_idx" ON "scraper_criminalrecord" ("parish"); args=(); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('scraper', '0001_initial', '2025-07-12 19:19:37.804286') RETURNING "django_migrations"."id"; args=('scraper', '0001_initial', '2025-07-12 19:19:37.804286'); alias=default
+(0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+(0.000) PRAGMA foreign_keys; args=None; alias=default
+(0.000) BEGIN; args=None; alias=default
+CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+(0.000) CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); args=None; alias=default
+(0.000) PRAGMA foreign_key_check; args=None; alias=default
+CREATE INDEX "django_session_expire_date_a5c62663" ON "django_session" ("expire_date"); (params ())
+(0.000) CREATE INDEX "django_session_expire_date_a5c62663" ON "django_session" ("expire_date"); args=(); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('sessions', '0001_initial', '2025-07-12 19:19:37.847561') RETURNING "django_migrations"."id"; args=('sessions', '0001_initial', '2025-07-12 19:19:37.847561'); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('admin', 'logentry') RETURNING "django_content_type"."id"; args=('admin', 'logentry'); alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" = 'logentry') LIMIT 21; args=('admin', 'logentry'); alias=default
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1,); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.016) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") VALUES ('Can add log entry', 1, 'add_logentry'), ('Can change log entry', 1, 'change_logentry'), ('Can delete log entry', 1, 'delete_logentry'), ('Can view log entry', 1, 'view_logentry') RETURNING "auth_permission"."id"; args=('Can add log entry', 1, 'add_logentry', 'Can change log entry', 1, 'change_logentry', 'Can delete log entry', 1, 'delete_logentry', 'Can view log entry', 1, 'view_logentry'); alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('auth', 'permission'), ('auth', 'group'), ('auth', 'user') RETURNING "django_content_type"."id"; args=('auth', 'permission', 'auth', 'group', 'auth', 'user'); alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'permission') LIMIT 21; args=('auth', 'permission'); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'group') LIMIT 21; args=('auth', 'group'); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'user') LIMIT 21; args=('auth', 'user'); alias=default
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(2, 3, 4); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") VALUES ('Can add permission', 2, 'add_permission'), ('Can change permission', 2, 'change_permission'), ('Can delete permission', 2, 'delete_permission'), ('Can view permission', 2, 'view_permission'), ('Can add group', 3, 'add_group'), ('Can change group', 3, 'change_group'), ('Can delete group', 3, 'delete_group'), ('Can view group', 3, 'view_group'), ('Can add user', 4, 'add_user'), ('Can change user', 4, 'change_user'), ('Can delete user', 4, 'delete_user'), ('Can view user', 4, 'view_user') RETURNING "auth_permission"."id"; args=('Can add permission', 2, 'add_permission', 'Can change permission', 2, 'change_permission', 'Can delete permission', 2, 'delete_permission', 'Can view permission', 2, 'view_permission', 'Can add group', 3, 'add_group', 'Can change group', 3, 'change_group', 'Can delete group', 3, 'delete_group', 'Can view group', 3, 'view_group', 'Can add user', 4, 'add_user', 'Can change user', 4, 'change_user', 'Can delete user', 4, 'delete_user', 'Can view user', 4, 'view_user'); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('contenttypes', 'contenttype') RETURNING "django_content_type"."id"; args=('contenttypes', 'contenttype'); alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" = 'contenttype') LIMIT 21; args=('contenttypes', 'contenttype'); alias=default
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") VALUES ('Can add content type', 5, 'add_contenttype'), ('Can change content type', 5, 'change_contenttype'), ('Can delete content type', 5, 'delete_contenttype'), ('Can view content type', 5, 'view_contenttype') RETURNING "auth_permission"."id"; args=('Can add content type', 5, 'add_contenttype', 'Can change content type', 5, 'change_contenttype', 'Can delete content type', 5, 'delete_contenttype', 'Can view content type', 5, 'view_contenttype'); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('sessions', 'session') RETURNING "django_content_type"."id"; args=('sessions', 'session'); alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" = 'session') LIMIT 21; args=('sessions', 'session'); alias=default
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") VALUES ('Can add session', 6, 'add_session'), ('Can change session', 6, 'change_session'), ('Can delete session', 6, 'delete_session'), ('Can view session', 6, 'view_session') RETURNING "auth_permission"."id"; args=('Can add session', 6, 'add_session', 'Can change session', 6, 'change_session', 'Can delete session', 6, 'delete_session', 'Can view session', 6, 'view_session'); alias=default
+(0.000) COMMIT; args=None; alias=default
+(0.016) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'scraper'; args=('scraper',); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('scraper', 'criminalrecord') RETURNING "django_content_type"."id"; args=('scraper', 'criminalrecord'); alias=default
+(0.015) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'scraper' AND "django_content_type"."model" = 'criminalrecord') LIMIT 21; args=('scraper', 'criminalrecord'); alias=default
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(7,); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") VALUES ('Can add criminal record', 7, 'add_criminalrecord'), ('Can change criminal record', 7, 'change_criminalrecord'), ('Can delete criminal record', 7, 'delete_criminalrecord'), ('Can view criminal record', 7, 'view_criminalrecord') RETURNING "auth_permission"."id"; args=('Can add criminal record', 7, 'add_criminalrecord', 'Can change criminal record', 7, 'change_criminalrecord', 'Can delete criminal record', 7, 'delete_criminalrecord', 'Can view criminal record', 7, 'view_criminalrecord'); alias=default
+(0.016) COMMIT; args=None; alias=default
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'scraper'; args=('scraper',); alias=default
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+(0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'jatif' LIMIT 21; args=('jatif',); alias=default
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'jatif' LIMIT 21; args=('jatif',); alias=default
+(0.047) INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") VALUES ('pbkdf2_sha256$600000$fmM4JHwgmhNZK528IvPkZ3$m/kW2WVD3uycl5r5LDt1v/rMz0J5OcoubfBWl6dBOh8=', NULL, 1, 'jatif', '', '', 'jatif443@gmail.com', 1, 1, '2025-07-12 19:20:11.554431') RETURNING "auth_user"."id"; args=('pbkdf2_sha256$600000$fmM4JHwgmhNZK528IvPkZ3$m/kW2WVD3uycl5r5LDt1v/rMz0J5OcoubfBWl6dBOh8=', None, True, 'jatif', '', '', 'jatif443@gmail.com', True, True, '2025-07-12 19:20:11.554431'); alias=default
+INFO 2025-07-13 00:33:55,423 patcher 15520 18984 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:33:55,704 scrapers 15520 18984 ChromeDriver initialization attempt 1 failed: 'ChromeOptions' object has no attribute 'headless'
+INFO 2025-07-13 00:34:44,132 patcher 15520 18984 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:34:44,370 scrapers 15520 18984 ChromeDriver initialization attempt 2 failed: you cannot reuse the ChromeOptions object
+INFO 2025-07-13 00:35:31,780 patcher 15520 18984 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:35:32,004 scrapers 15520 18984 ChromeDriver initialization attempt 3 failed: you cannot reuse the ChromeOptions object
+ERROR 2025-07-13 00:35:32,004 scrapers 15520 18984 Failed to initialize WebDriver: you cannot reuse the ChromeOptions object
+ERROR 2025-07-13 00:35:32,004 run_scraper 15520 18984 Scraper command failed: you cannot reuse the ChromeOptions object
+INFO 2025-07-13 00:35:32,004 __init__ 15520 18984 ensuring close
+INFO 2025-07-13 00:35:32,004 __init__ 15520 18984 ensuring close
+INFO 2025-07-13 00:35:32,004 __init__ 15520 18984 ensuring close
+INFO 2025-07-13 00:36:58,519 patcher 5668 4040 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:36:58,742 scrapers 5668 4040 ChromeDriver initialization attempt 1 failed: 'ChromeOptions' object has no attribute 'headless'
+INFO 2025-07-13 00:37:23,146 patcher 5668 4040 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:37:23,395 scrapers 5668 4040 ChromeDriver initialization attempt 2 failed: you cannot reuse the ChromeOptions object
+INFO 2025-07-13 00:37:44,673 patcher 5668 4040 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+WARNING 2025-07-13 00:37:44,939 scrapers 5668 4040 ChromeDriver initialization attempt 3 failed: you cannot reuse the ChromeOptions object
+ERROR 2025-07-13 00:37:44,939 scrapers 5668 4040 Failed to initialize WebDriver: you cannot reuse the ChromeOptions object
+ERROR 2025-07-13 00:37:44,939 run_scraper 5668 4040 Scraper command failed: you cannot reuse the ChromeOptions object
+INFO 2025-07-13 00:37:44,939 __init__ 5668 4040 ensuring close
+INFO 2025-07-13 00:37:44,939 __init__ 5668 4040 ensuring close
+INFO 2025-07-13 00:37:44,939 __init__ 5668 4040 ensuring close
+INFO 2025-07-13 00:38:32,405 patcher 12676 6776 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+INFO 2025-07-13 00:38:33,489 __init__ 12676 6776 setting properties for headless
+INFO 2025-07-13 00:38:33,495 scrapers 12676 6776 ChromeDriver initialized successfully (attempt 1)
+INFO 2025-07-13 00:38:33,502 scrapers 12676 6776 Starting scraper execution...
+INFO 2025-07-13 00:38:33,503 scrapers 12676 6776 Attempting to login...
+INFO 2025-07-13 00:38:43,985 scrapers 12676 6776 Login successful
+INFO 2025-07-13 00:38:43,986 scrapers 12676 6776 Navigating to search page...
+INFO 2025-07-13 00:39:06,094 scrapers 12676 6776 Successfully navigated to search page
+INFO 2025-07-13 00:39:06,096 scrapers 12676 6776 Setting date range: 01/01/2020 to 01/07/2025
+ERROR 2025-07-13 00:39:36,118 scrapers 12676 6776 Failed to set date range: Message: timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0xd344a3+62419]
+	GetHandleVerifier [0x0xd344e4+62484]
+	(No symbol) [0x0xb72133]
+	(No symbol) [0x0xb62e8b]
+	(No symbol) [0x0xb62bc1]
+	(No symbol) [0x0xb60b64]
+	(No symbol) [0x0xb6162d]
+	(No symbol) [0x0xb6ddc9]
+	(No symbol) [0x0xb7f2b5]
+	(No symbol) [0x0xb84ce6]
+	(No symbol) [0x0xb61c6d]
+	(No symbol) [0x0xb7f05e]
+	(No symbol) [0x0xc00789]
+	(No symbol) [0x0xbdf266]
+	(No symbol) [0x0xbae852]
+	(No symbol) [0x0xbaf6f4]
+	GetHandleVerifier [0x0xfa4793+2619075]
+	GetHandleVerifier [0x0xf9fbaa+2599642]
+	GetHandleVerifier [0x0xd5b04a+221050]
+	GetHandleVerifier [0x0xd4b2c8+156152]
+	GetHandleVerifier [0x0xd51c7d+183213]
+	GetHandleVerifier [0x0xd3c388+94904]
+	GetHandleVerifier [0x0xd3c512+95298]
+	GetHandleVerifier [0x0xd2766a+9626]
+	BaseThreadInitThunk [0x0x765b5d49+25]
+	RtlInitializeExceptionChain [0x0x7765d1ab+107]
+	RtlGetAppContainerNamedObjectPath [0x0x7765d131+561]
+
+ERROR 2025-07-13 00:39:36,120 scrapers 12676 6776 Scraper run error: Failed to set search criteria
+INFO 2025-07-13 00:39:36,400 scrapers 12676 6776 Browser closed successfully
+INFO 2025-07-13 00:39:36,416 __init__ 12676 6776 ensuring close
+INFO 2025-07-13 00:44:46,675 patcher 8876 12160 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+INFO 2025-07-13 00:44:47,853 __init__ 8876 12160 setting properties for headless
+INFO 2025-07-13 00:44:47,859 scrapers 8876 12160 ChromeDriver initialized successfully (attempt 1)
+INFO 2025-07-13 00:44:47,866 scrapers 8876 12160 Starting scraper execution...
+INFO 2025-07-13 00:44:47,866 scrapers 8876 12160 Attempting to login...
+INFO 2025-07-13 00:45:06,834 scrapers 8876 12160 Login successful
+INFO 2025-07-13 00:45:06,835 scrapers 8876 12160 Navigating to search page...
+INFO 2025-07-13 00:45:13,015 scrapers 8876 12160 Found criminal search button using: criminal-search-step1
+INFO 2025-07-13 00:45:25,623 scrapers 8876 12160 Accepted EULA
+INFO 2025-07-13 00:45:25,667 scrapers 8876 12160 Found 2 windows, switching to latest
+INFO 2025-07-13 00:45:28,719 scrapers 8876 12160 Page loading completed
+INFO 2025-07-13 00:45:28,720 scrapers 8876 12160 Successfully navigated to search page
+INFO 2025-07-13 00:45:28,721 scrapers 8876 12160 Setting date range: 01/01/2024 to 01/07/2025
+INFO 2025-07-13 00:45:31,722 scrapers 8876 12160 Trying date field strategy 1...
+INFO 2025-07-13 00:45:31,783 scrapers 8876 12160 Found start date field using: datefield-1029-inputEl
+INFO 2025-07-13 00:45:31,853 scrapers 8876 12160 Found end date field using: datefield-1030-inputEl
+INFO 2025-07-13 00:45:31,855 scrapers 8876 12160 Successfully found both date fields using strategy 1
+INFO 2025-07-13 00:45:31,867 scrapers 8876 12160 Clearing and setting date values...
+INFO 2025-07-13 00:45:32,082 scrapers 8876 12160 Set dates using JavaScript method
+INFO 2025-07-13 00:45:34,143 scrapers 8876 12160 Date verification - Start: 01/01/2024, End: 01/07/2025
+INFO 2025-07-13 00:45:34,144 scrapers 8876 12160 Date range set successfully
+INFO 2025-07-13 00:45:34,145 scrapers 8876 12160 Executing search...
+INFO 2025-07-13 00:45:34,318 scrapers 8876 12160 Found search button using: submitButton
+INFO 2025-07-13 00:45:34,644 scrapers 8876 12160 Search button clicked
+INFO 2025-07-13 00:46:27,471 scrapers 8876 12160 Found results table using: //table[contains(@class, 'grid') or contains(@class, 'result')]
+INFO 2025-07-13 00:46:30,504 scrapers 8876 12160 Search executed successfully
+INFO 2025-07-13 00:46:30,505 scrapers 8876 12160 Starting to scrape records (max 1 pages)
+INFO 2025-07-13 00:46:30,506 scrapers 8876 12160 Scraping page 1
+ERROR 2025-07-13 00:46:51,594 scrapers 8876 12160 Scraping failed: Message: 
+
+ERROR 2025-07-13 00:46:51,595 scrapers 8876 12160 Scraper run error: Scraping failed
+INFO 2025-07-13 00:46:51,944 scrapers 8876 12160 Browser closed successfully
+INFO 2025-07-13 00:46:51,944 __init__ 8876 12160 ensuring close
+INFO 2025-07-13 00:49:16,311 patcher 17932 4172 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+INFO 2025-07-13 00:49:17,469 __init__ 17932 4172 setting properties for headless
+INFO 2025-07-13 00:49:17,476 scrapers 17932 4172 ChromeDriver initialized successfully (attempt 1)
+INFO 2025-07-13 00:49:17,482 scrapers 17932 4172 Starting scraper execution...
+INFO 2025-07-13 00:49:17,482 scrapers 17932 4172 Attempting to login...
+INFO 2025-07-13 00:49:27,587 scrapers 17932 4172 Login successful
+INFO 2025-07-13 00:49:27,589 scrapers 17932 4172 Navigating to search page...
+INFO 2025-07-13 00:49:33,682 scrapers 17932 4172 Found criminal search button using: criminal-search-step1
+INFO 2025-07-13 00:49:46,365 scrapers 17932 4172 Accepted EULA
+INFO 2025-07-13 00:49:46,396 scrapers 17932 4172 Found 2 windows, switching to latest
+INFO 2025-07-13 00:49:55,632 scrapers 17932 4172 Page loading completed
+INFO 2025-07-13 00:49:55,632 scrapers 17932 4172 Successfully navigated to search page
+INFO 2025-07-13 00:49:55,633 scrapers 17932 4172 Setting date range: 01/01/2024 to 01/07/2025
+INFO 2025-07-13 00:49:58,634 scrapers 17932 4172 Trying date field strategy 1...
+INFO 2025-07-13 00:49:58,658 scrapers 17932 4172 Found start date field using: datefield-1029-inputEl
+INFO 2025-07-13 00:49:58,682 scrapers 17932 4172 Found end date field using: datefield-1030-inputEl
+INFO 2025-07-13 00:49:58,682 scrapers 17932 4172 Successfully found both date fields using strategy 1
+INFO 2025-07-13 00:49:58,686 scrapers 17932 4172 Clearing and setting date values...
+INFO 2025-07-13 00:49:58,800 scrapers 17932 4172 Set dates using JavaScript method
+INFO 2025-07-13 00:50:00,869 scrapers 17932 4172 Date verification - Start: 01/01/2024, End: 01/07/2025
+INFO 2025-07-13 00:50:00,871 scrapers 17932 4172 Date range set successfully
+INFO 2025-07-13 00:50:00,872 scrapers 17932 4172 Executing search...
+INFO 2025-07-13 00:50:01,028 scrapers 17932 4172 Found search button using: submitButton
+INFO 2025-07-13 00:50:01,215 scrapers 17932 4172 Search button clicked
+INFO 2025-07-13 00:50:54,116 scrapers 17932 4172 Found results table using: //table[contains(@class, 'grid') or contains(@class, 'result')]
+INFO 2025-07-13 00:50:57,149 scrapers 17932 4172 Search executed successfully
+INFO 2025-07-13 00:50:57,150 scrapers 17932 4172 Starting to scrape records (max 1 pages)
+INFO 2025-07-13 00:50:57,151 scrapers 17932 4172 Scraping page 1
+INFO 2025-07-13 00:51:18,373 scrapers 17932 4172 Found 72 rows using selector: //table[contains(@class, 'grid')]/tbody/tr
+INFO 2025-07-13 00:51:19,036 scrapers 17932 4172 Saved record: 00-CR-163837 - SIMON, AARON
+INFO 2025-07-13 00:51:19,852 scrapers 17932 4172 Saved record: 163902-F - THOMAS, CORDEZ S
+INFO 2025-07-13 00:51:20,314 scrapers 17932 4172 Saved record: 163903-M - FONTENOT, ANTHONY GORDON
+INFO 2025-07-13 00:51:20,667 scrapers 17932 4172 Saved record: 163904-F - FONTENOT, ROBERT JAMES JR
+INFO 2025-07-13 00:51:21,040 scrapers 17932 4172 Saved record: 163905-F - FONTENOT, ROBERT JAMES JR
+INFO 2025-07-13 00:51:21,726 scrapers 17932 4172 Saved record: 163906-F - WILLIAMS, PAUL STEVE
+INFO 2025-07-13 00:51:22,335 scrapers 17932 4172 Saved record: 163928-F - WATSON, AMARION DAKWAN
+INFO 2025-07-13 00:51:22,957 scrapers 17932 4172 Saved record: 163935-M - SAM, BRANDY RAQUEL
+INFO 2025-07-13 00:51:23,586 scrapers 17932 4172 Saved record: 2024-CR-199294 - BLESSMAN, ALLISON ROSE
+INFO 2025-07-13 00:51:24,230 scrapers 17932 4172 Saved record: 2024-CR-199294 - ALLEN, MARSHALL
+INFO 2025-07-13 00:51:24,716 scrapers 17932 4172 Saved record: 2025-215327 - STEELE, LEANNA MARIA
+INFO 2025-07-13 00:51:25,162 scrapers 17932 4172 Saved record: 2025-CR-198603 - SAMPY, JOVON ROCHELLE
+INFO 2025-07-13 00:51:25,579 scrapers 17932 4172 Saved record: 2025-CR-198607 - BOOTY, MATTHEW DRYAN Jr.
+INFO 2025-07-13 00:51:25,980 scrapers 17932 4172 Saved record: 2025-CR-198608 - WOODS, TRAVONTE D
+INFO 2025-07-13 00:51:26,385 scrapers 17932 4172 Saved record: 2025-CR-198609 - AUTERY, AMBER ROSE
+INFO 2025-07-13 00:51:26,777 scrapers 17932 4172 Saved record: 2025-CR-198931 - RICHMOND, RICHARD ALLEN JR.
+INFO 2025-07-13 00:51:27,169 scrapers 17932 4172 Saved record: 2025-CR-198932 - PHILLIPS, ARTHUR J JR.
+INFO 2025-07-13 00:51:27,774 scrapers 17932 4172 Saved record: 2025-CR-198933 - PAUL, BAKARI JUDE
+INFO 2025-07-13 00:51:28,287 scrapers 17932 4172 Saved record: 2025-CR-198934 - ONEZINE, TANAKOUS
+INFO 2025-07-13 00:51:29,044 scrapers 17932 4172 Saved record: 2025-CR-198935 - ONEZINE, TANAKOUS
+INFO 2025-07-13 00:51:29,660 scrapers 17932 4172 Saved record: 2025-CR-198936 - OLIVIER, DARRELL WAYNE
+INFO 2025-07-13 00:51:30,290 scrapers 17932 4172 Saved record: 2025-CR-198937 - NICHOLAS, KERRY LEE JR.
+INFO 2025-07-13 00:51:30,700 scrapers 17932 4172 Saved record: 2025-CR-199165 - SHELVIN, KEIPAUL DAVID
+INFO 2025-07-13 00:51:31,100 scrapers 17932 4172 Saved record: 2025-CR-199180 - BROUSSARD, TYLOR ROSS
+INFO 2025-07-13 00:51:31,712 scrapers 17932 4172 Saved record: 2025-CR-199181 - THOMPSON, JOSEPH WENDELLE
+INFO 2025-07-13 00:51:32,373 scrapers 17932 4172 Saved record: 2025-CR-199182 - SAVOY, CHRISTOPHER JOSEPH
+INFO 2025-07-13 00:51:32,895 scrapers 17932 4172 Saved record: 2025-CR-199182 - SIMON, MARKAYLAN ISAIAH
+INFO 2025-07-13 00:51:33,405 scrapers 17932 4172 Saved record: 2025-CR-199225 - ARCENEAUX, DUSTIN PAUL
+INFO 2025-07-13 00:51:33,917 scrapers 17932 4172 Saved record: 2025-CR-199246 - DAVIS, ANDELL DASHAWN
+INFO 2025-07-13 00:51:34,584 scrapers 17932 4172 Saved record: 2025-CR-199270 - KEYS, VERDNA VICTORIA
+INFO 2025-07-13 00:51:35,089 scrapers 17932 4172 Saved record: 2025-CR-199296 - BOULEY, DAVID
+INFO 2025-07-13 00:51:35,600 scrapers 17932 4172 Saved record: 2025-CR-199302 - GARDNER, JAMIE LEE
+INFO 2025-07-13 00:51:36,111 scrapers 17932 4172 Saved record: 2025-CR-199303 - RIVERA, DAMIEN PEREZ
+INFO 2025-07-13 00:51:36,589 scrapers 17932 4172 Saved record: 2025-CR-199304 - FRANCIS, REGINALD KENDELL
+INFO 2025-07-13 00:51:37,268 scrapers 17932 4172 Saved record: 2025-CR-199305 - DIXON, JAQUANN
+INFO 2025-07-13 00:51:37,902 scrapers 17932 4172 Saved record: 2025-CR-199305 - RICHARD, DAMONDRIC DAVON
+INFO 2025-07-13 00:51:38,557 scrapers 17932 4172 Saved record: 2025-CR-199306 - CHEVALIER, DEAMONTRE
+INFO 2025-07-13 00:51:39,178 scrapers 17932 4172 Saved record: 2025-CR-199307 - GIROUARD, MARK WILLIAM
+INFO 2025-07-13 00:51:39,645 scrapers 17932 4172 Saved record: 2025-CR-199308 - LUDA, JULIE
+INFO 2025-07-13 00:51:40,059 scrapers 17932 4172 Saved record: 2025-CR-199309 - ARRELLANO, LUIS
+INFO 2025-07-13 00:51:40,463 scrapers 17932 4172 Saved record: 2025-CR-199310 - LOUVIERE, LEROY JOSEPH
+INFO 2025-07-13 00:51:40,857 scrapers 17932 4172 Saved record: 2025-CR-199311 - ZEAGLER, JAMES MIRRON Jr.
+INFO 2025-07-13 00:51:41,265 scrapers 17932 4172 Saved record: 2025-CR-199312 - GUINN, KERRY MARSHAL
+INFO 2025-07-13 00:51:41,677 scrapers 17932 4172 Saved record: 2025-CR-199313 - COMEAUX, BRYNAN PATRICK
+INFO 2025-07-13 00:51:42,071 scrapers 17932 4172 Saved record: 2025-CR-199314 - BONNET, JAMES CARSON
+INFO 2025-07-13 00:51:42,722 scrapers 17932 4172 Saved record: 2025-CR-199315 - LANGHAM, JEREMY WAYNE
+INFO 2025-07-13 00:51:43,237 scrapers 17932 4172 Saved record: 2025-CR-199316 - PURVIS, JASON CHADWICK
+INFO 2025-07-13 00:51:43,645 scrapers 17932 4172 Saved record: 2025-CR-199317 - RENARD, TREY MICHAEL
+INFO 2025-07-13 00:51:44,059 scrapers 17932 4172 Saved record: 2025-CR-199318 - WHITE, KEVIN JAMES
+INFO 2025-07-13 00:51:44,816 scrapers 17932 4172 Saved record: 2025-CR-199319 - THIBODEAUX, MEGAN
+INFO 2025-07-13 00:51:45,444 scrapers 17932 4172 Saved record: 2025-CR-199320 - ODOM, JACOB SETH
+INFO 2025-07-13 00:51:46,103 scrapers 17932 4172 Saved record: 2025-CR-199321 - SEBILLE, AMANI NAZIM
+INFO 2025-07-13 00:51:46,698 scrapers 17932 4172 Saved record: 2025-CR-199322 - WILLIAMS, QUOTALON DECUOIR
+INFO 2025-07-13 00:51:47,229 scrapers 17932 4172 Saved record: 2025-CR-199323 - PAUL, JAMAL ANTHONY
+INFO 2025-07-13 00:51:47,642 scrapers 17932 4172 Saved record: 2025-CR-199324 - HUDSON, TREVIS TRENTELL
+INFO 2025-07-13 00:51:48,051 scrapers 17932 4172 Saved record: 2025-CR-199330 - WINSTON, JAKYRI DAQUAN
+INFO 2025-07-13 00:51:48,461 scrapers 17932 4172 Saved record: 2025-CR-199331 - WILTZ, EMMANUEL JAMES
+INFO 2025-07-13 00:51:49,098 scrapers 17932 4172 Saved record: 2025-CR-199332 - WILLIAMS, RUSHAUN JONTRELL
+INFO 2025-07-13 00:51:49,617 scrapers 17932 4172 Saved record: 2025-CR-199333 - WASHINGTON, ARTHUR JOSEPH
+INFO 2025-07-13 00:51:50,115 scrapers 17932 4172 Saved record: 2025-CR-199334 - VICTOR, AMELIA CAMILLE
+INFO 2025-07-13 00:51:50,639 scrapers 17932 4172 Saved record: 2025-CR-199335 - TORRES, CAYLOND
+INFO 2025-07-13 00:51:51,153 scrapers 17932 4172 Saved record: 2025-CR-199336 - THOMAS, CURLEY JOSEPH
+INFO 2025-07-13 00:51:51,877 scrapers 17932 4172 Saved record: 2025-CR-199337 - THOMAS, CHASE PAUL
+INFO 2025-07-13 00:51:52,445 scrapers 17932 4172 Saved record: 2025-CR-199338 - THOMAS, AQUILLA WANAKIS
+INFO 2025-07-13 00:51:52,885 scrapers 17932 4172 Saved record: 2025-CR-199339 - THIBEAUX, COLIN RAY
+INFO 2025-07-13 00:51:53,346 scrapers 17932 4172 Saved record: 2025-CR-199340 - STOKES, JEREMY
+INFO 2025-07-13 00:51:53,792 scrapers 17932 4172 Saved record: 2025-CR-199341 - STEWARD, LEBRON JAMOR
+INFO 2025-07-13 00:51:54,352 scrapers 17932 4172 Saved record: 2025-CR-199342 - SOLARES-DEL CID, JONATHAN
+INFO 2025-07-13 00:51:54,743 scrapers 17932 4172 Saved record: 2025-CR-199343 - ROMERO, BRYSON
+INFO 2025-07-13 00:51:55,145 scrapers 17932 4172 Saved record: 2025-CR-199343 - PROULX, TREVOR MICHAEL
+INFO 2025-07-13 00:51:55,533 scrapers 17932 4172 Saved record: 2025-CR-199344 - ROBERTSON, LEDONTI
+INFO 2025-07-13 00:51:55,916 scrapers 17932 4172 Saved record: 2025-CR-199345 - LOUIS, JAYVIN LAMAR
+INFO 2025-07-13 00:51:55,916 scrapers 17932 4172 Scraped 72 records from page 1
+INFO 2025-07-13 00:51:55,917 scrapers 17932 4172 Scraping completed. Total records: 72
+INFO 2025-07-13 00:51:55,920 scrapers 17932 4172 Exported 72 records to scraped_records.csv
+INFO 2025-07-13 00:51:55,921 scrapers 17932 4172 Scraper run completed successfully.
+INFO 2025-07-13 00:51:56,234 scrapers 17932 4172 Browser closed successfully
+INFO 2025-07-13 00:51:56,234 __init__ 17932 4172 ensuring close
+INFO 2025-07-13 00:53:51,140 patcher 3200 2408 patching driver executable C:\Users\jatif\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+INFO 2025-07-13 00:53:52,460 __init__ 3200 2408 setting properties for headless
+INFO 2025-07-13 00:53:52,466 scrapers 3200 2408 ChromeDriver initialized successfully (attempt 1)
+INFO 2025-07-13 00:53:52,479 scrapers 3200 2408 Starting scraper execution...
+INFO 2025-07-13 00:53:52,479 scrapers 3200 2408 Attempting to login...
+INFO 2025-07-13 00:54:02,096 scrapers 3200 2408 Login successful
+INFO 2025-07-13 00:54:02,097 scrapers 3200 2408 Navigating to search page...
+INFO 2025-07-13 00:54:08,143 scrapers 3200 2408 Found criminal search button using: criminal-search-step1
+INFO 2025-07-13 00:54:20,632 scrapers 3200 2408 Accepted EULA
+INFO 2025-07-13 00:54:20,667 scrapers 3200 2408 Found 2 windows, switching to latest
+INFO 2025-07-13 00:54:25,918 scrapers 3200 2408 Page loading completed
+INFO 2025-07-13 00:54:25,918 scrapers 3200 2408 Successfully navigated to search page
+INFO 2025-07-13 00:54:25,918 scrapers 3200 2408 Setting date range: 01/01/2025 to 01/07/2025
+INFO 2025-07-13 00:54:28,932 scrapers 3200 2408 Trying date field strategy 1...
+INFO 2025-07-13 00:54:28,992 scrapers 3200 2408 Found start date field using: datefield-1029-inputEl
+INFO 2025-07-13 00:54:29,044 scrapers 3200 2408 Found end date field using: datefield-1030-inputEl
+INFO 2025-07-13 00:54:29,045 scrapers 3200 2408 Successfully found both date fields using strategy 1
+INFO 2025-07-13 00:54:29,053 scrapers 3200 2408 Clearing and setting date values...
+INFO 2025-07-13 00:54:29,158 scrapers 3200 2408 Set dates using JavaScript method
+INFO 2025-07-13 00:54:31,217 scrapers 3200 2408 Date verification - Start: 01/01/2025, End: 01/07/2025
+INFO 2025-07-13 00:54:31,218 scrapers 3200 2408 Date range set successfully
+INFO 2025-07-13 00:54:31,219 scrapers 3200 2408 Executing search...
+INFO 2025-07-13 00:54:31,371 scrapers 3200 2408 Found search button using: submitButton
+INFO 2025-07-13 00:54:31,795 scrapers 3200 2408 Search button clicked
+INFO 2025-07-13 00:55:24,702 scrapers 3200 2408 Found results table using: //table[contains(@class, 'grid') or contains(@class, 'result')]
+INFO 2025-07-13 00:55:27,733 scrapers 3200 2408 Search executed successfully
+INFO 2025-07-13 00:55:27,734 scrapers 3200 2408 Starting to scrape records (max 1 pages)
+INFO 2025-07-13 00:55:27,738 scrapers 3200 2408 Scraping page 1
+INFO 2025-07-13 00:55:48,892 scrapers 3200 2408 Found 72 rows using selector: //table[contains(@class, 'grid')]/tbody/tr
+INFO 2025-07-13 00:55:49,428 scrapers 3200 2408 Saved record: 00-CR-163837 - SIMON, AARON
+INFO 2025-07-13 00:55:49,882 scrapers 3200 2408 Saved record: 163902-F - THOMAS, CORDEZ S
+INFO 2025-07-13 00:55:50,637 scrapers 3200 2408 Saved record: 163903-M - FONTENOT, ANTHONY GORDON
+INFO 2025-07-13 00:55:51,010 scrapers 3200 2408 Saved record: 163904-F - FONTENOT, ROBERT JAMES JR
+INFO 2025-07-13 00:55:51,402 scrapers 3200 2408 Saved record: 163905-F - FONTENOT, ROBERT JAMES JR
+INFO 2025-07-13 00:55:51,962 scrapers 3200 2408 Saved record: 163906-F - WILLIAMS, PAUL STEVE
+INFO 2025-07-13 00:55:52,558 scrapers 3200 2408 Saved record: 163928-F - WATSON, AMARION DAKWAN
+INFO 2025-07-13 00:55:53,083 scrapers 3200 2408 Saved record: 163935-M - SAM, BRANDY RAQUEL
+INFO 2025-07-13 00:55:53,591 scrapers 3200 2408 Saved record: 2024-CR-199294 - BLESSMAN, ALLISON ROSE
+INFO 2025-07-13 00:55:54,093 scrapers 3200 2408 Saved record: 2024-CR-199294 - ALLEN, MARSHALL
+INFO 2025-07-13 00:55:54,676 scrapers 3200 2408 Saved record: 2025-215327 - STEELE, LEANNA MARIA
+INFO 2025-07-13 00:55:55,105 scrapers 3200 2408 Saved record: 2025-CR-198603 - SAMPY, JOVON ROCHELLE
+INFO 2025-07-13 00:55:55,760 scrapers 3200 2408 Saved record: 2025-CR-198607 - BOOTY, MATTHEW DRYAN Jr.
+INFO 2025-07-13 00:55:56,175 scrapers 3200 2408 Saved record: 2025-CR-198608 - WOODS, TRAVONTE D
+INFO 2025-07-13 00:55:56,597 scrapers 3200 2408 Saved record: 2025-CR-198609 - AUTERY, AMBER ROSE
+INFO 2025-07-13 00:55:57,060 scrapers 3200 2408 Saved record: 2025-CR-198931 - RICHMOND, RICHARD ALLEN JR.
+INFO 2025-07-13 00:55:57,481 scrapers 3200 2408 Saved record: 2025-CR-198932 - PHILLIPS, ARTHUR J JR.
+INFO 2025-07-13 00:55:57,905 scrapers 3200 2408 Saved record: 2025-CR-198933 - PAUL, BAKARI JUDE
+INFO 2025-07-13 00:55:58,305 scrapers 3200 2408 Saved record: 2025-CR-198934 - ONEZINE, TANAKOUS
+INFO 2025-07-13 00:55:58,705 scrapers 3200 2408 Saved record: 2025-CR-198935 - ONEZINE, TANAKOUS
+INFO 2025-07-13 00:55:59,099 scrapers 3200 2408 Saved record: 2025-CR-198936 - OLIVIER, DARRELL WAYNE
+INFO 2025-07-13 00:55:59,499 scrapers 3200 2408 Saved record: 2025-CR-198937 - NICHOLAS, KERRY LEE JR.
+INFO 2025-07-13 00:55:59,930 scrapers 3200 2408 Saved record: 2025-CR-199165 - SHELVIN, KEIPAUL DAVID
+INFO 2025-07-13 00:56:00,338 scrapers 3200 2408 Saved record: 2025-CR-199180 - BROUSSARD, TYLOR ROSS
+INFO 2025-07-13 00:56:00,743 scrapers 3200 2408 Saved record: 2025-CR-199181 - THOMPSON, JOSEPH WENDELLE
+INFO 2025-07-13 00:56:01,242 scrapers 3200 2408 Saved record: 2025-CR-199182 - SAVOY, CHRISTOPHER JOSEPH
+INFO 2025-07-13 00:56:01,644 scrapers 3200 2408 Saved record: 2025-CR-199182 - SIMON, MARKAYLAN ISAIAH
+INFO 2025-07-13 00:56:02,025 scrapers 3200 2408 Saved record: 2025-CR-199225 - ARCENEAUX, DUSTIN PAUL
+INFO 2025-07-13 00:56:02,420 scrapers 3200 2408 Saved record: 2025-CR-199246 - DAVIS, ANDELL DASHAWN
+INFO 2025-07-13 00:56:02,827 scrapers 3200 2408 Saved record: 2025-CR-199270 - KEYS, VERDNA VICTORIA
+INFO 2025-07-13 00:56:03,561 scrapers 3200 2408 Saved record: 2025-CR-199296 - BOULEY, DAVID
+INFO 2025-07-13 00:56:04,210 scrapers 3200 2408 Saved record: 2025-CR-199302 - GARDNER, JAMIE LEE
+INFO 2025-07-13 00:56:04,852 scrapers 3200 2408 Saved record: 2025-CR-199303 - RIVERA, DAMIEN PEREZ
+INFO 2025-07-13 00:56:05,496 scrapers 3200 2408 Saved record: 2025-CR-199304 - FRANCIS, REGINALD KENDELL
+INFO 2025-07-13 00:56:06,123 scrapers 3200 2408 Saved record: 2025-CR-199305 - DIXON, JAQUANN
+INFO 2025-07-13 00:56:06,765 scrapers 3200 2408 Saved record: 2025-CR-199305 - RICHARD, DAMONDRIC DAVON
+INFO 2025-07-13 00:56:07,338 scrapers 3200 2408 Saved record: 2025-CR-199306 - CHEVALIER, DEAMONTRE
+INFO 2025-07-13 00:56:07,840 scrapers 3200 2408 Saved record: 2025-CR-199307 - GIROUARD, MARK WILLIAM
+INFO 2025-07-13 00:56:08,246 scrapers 3200 2408 Saved record: 2025-CR-199308 - LUDA, JULIE
+INFO 2025-07-13 00:56:08,637 scrapers 3200 2408 Saved record: 2025-CR-199309 - ARRELLANO, LUIS
+INFO 2025-07-13 00:56:09,302 scrapers 3200 2408 Saved record: 2025-CR-199310 - LOUVIERE, LEROY JOSEPH
+INFO 2025-07-13 00:56:09,891 scrapers 3200 2408 Saved record: 2025-CR-199311 - ZEAGLER, JAMES MIRRON Jr.
+INFO 2025-07-13 00:56:10,417 scrapers 3200 2408 Saved record: 2025-CR-199312 - GUINN, KERRY MARSHAL
+INFO 2025-07-13 00:56:10,921 scrapers 3200 2408 Saved record: 2025-CR-199313 - COMEAUX, BRYNAN PATRICK
+INFO 2025-07-13 00:56:11,449 scrapers 3200 2408 Saved record: 2025-CR-199314 - BONNET, JAMES CARSON
+INFO 2025-07-13 00:56:11,997 scrapers 3200 2408 Saved record: 2025-CR-199315 - LANGHAM, JEREMY WAYNE
+INFO 2025-07-13 00:56:12,511 scrapers 3200 2408 Saved record: 2025-CR-199316 - PURVIS, JASON CHADWICK
+INFO 2025-07-13 00:56:13,037 scrapers 3200 2408 Saved record: 2025-CR-199317 - RENARD, TREY MICHAEL
+INFO 2025-07-13 00:56:13,561 scrapers 3200 2408 Saved record: 2025-CR-199318 - WHITE, KEVIN JAMES
+INFO 2025-07-13 00:56:14,064 scrapers 3200 2408 Saved record: 2025-CR-199319 - THIBODEAUX, MEGAN
+INFO 2025-07-13 00:56:14,569 scrapers 3200 2408 Saved record: 2025-CR-199320 - ODOM, JACOB SETH
+INFO 2025-07-13 00:56:15,072 scrapers 3200 2408 Saved record: 2025-CR-199321 - SEBILLE, AMANI NAZIM
+INFO 2025-07-13 00:56:15,540 scrapers 3200 2408 Saved record: 2025-CR-199322 - WILLIAMS, QUOTALON DECUOIR
+INFO 2025-07-13 00:56:15,940 scrapers 3200 2408 Saved record: 2025-CR-199323 - PAUL, JAMAL ANTHONY
+INFO 2025-07-13 00:56:16,343 scrapers 3200 2408 Saved record: 2025-CR-199324 - HUDSON, TREVIS TRENTELL
+INFO 2025-07-13 00:56:16,771 scrapers 3200 2408 Saved record: 2025-CR-199330 - WINSTON, JAKYRI DAQUAN
+INFO 2025-07-13 00:56:17,178 scrapers 3200 2408 Saved record: 2025-CR-199331 - WILTZ, EMMANUEL JAMES
+INFO 2025-07-13 00:56:17,859 scrapers 3200 2408 Saved record: 2025-CR-199332 - WILLIAMS, RUSHAUN JONTRELL
+INFO 2025-07-13 00:56:18,503 scrapers 3200 2408 Saved record: 2025-CR-199333 - WASHINGTON, ARTHUR JOSEPH
+INFO 2025-07-13 00:56:19,136 scrapers 3200 2408 Saved record: 2025-CR-199334 - VICTOR, AMELIA CAMILLE
+INFO 2025-07-13 00:56:19,777 scrapers 3200 2408 Saved record: 2025-CR-199335 - TORRES, CAYLOND
+INFO 2025-07-13 00:56:20,261 scrapers 3200 2408 Saved record: 2025-CR-199336 - THOMAS, CURLEY JOSEPH
+INFO 2025-07-13 00:56:20,656 scrapers 3200 2408 Saved record: 2025-CR-199337 - THOMAS, CHASE PAUL
+INFO 2025-07-13 00:56:21,055 scrapers 3200 2408 Saved record: 2025-CR-199338 - THOMAS, AQUILLA WANAKIS
+INFO 2025-07-13 00:56:21,487 scrapers 3200 2408 Saved record: 2025-CR-199339 - THIBEAUX, COLIN RAY
+INFO 2025-07-13 00:56:21,897 scrapers 3200 2408 Saved record: 2025-CR-199340 - STOKES, JEREMY
+INFO 2025-07-13 00:56:22,620 scrapers 3200 2408 Saved record: 2025-CR-199341 - STEWARD, LEBRON JAMOR
+INFO 2025-07-13 00:56:23,253 scrapers 3200 2408 Saved record: 2025-CR-199342 - SOLARES-DEL CID, JONATHAN
+INFO 2025-07-13 00:56:23,895 scrapers 3200 2408 Saved record: 2025-CR-199343 - ROMERO, BRYSON
+INFO 2025-07-13 00:56:24,549 scrapers 3200 2408 Saved record: 2025-CR-199343 - PROULX, TREVOR MICHAEL
+INFO 2025-07-13 00:56:25,104 scrapers 3200 2408 Saved record: 2025-CR-199344 - ROBERTSON, LEDONTI
+INFO 2025-07-13 00:56:25,526 scrapers 3200 2408 Saved record: 2025-CR-199345 - LOUIS, JAYVIN LAMAR
+INFO 2025-07-13 00:56:25,526 scrapers 3200 2408 Scraped 72 records from page 1
+INFO 2025-07-13 00:56:25,527 scrapers 3200 2408 Scraping completed. Total records: 72
+INFO 2025-07-13 00:56:25,530 scrapers 3200 2408 Exported 72 records to scraped_records.csv
+INFO 2025-07-13 00:56:25,530 scrapers 3200 2408 Scraper run completed successfully.
+INFO 2025-07-13 00:56:25,837 scrapers 3200 2408 Browser closed successfully
+INFO 2025-07-13 00:56:25,837 __init__ 3200 2408 ensuring close
+INFO 2025-07-13 00:57:26,524 autoreload 12160 13496 Watching for file changes with StatReloader
+INFO 2025-07-13 00:57:35,234 basehttp 12160 5712 "GET / HTTP/1.1" 200 14283
+INFO 2025-07-13 00:57:43,253 basehttp 12160 16448 "GET /?page=3 HTTP/1.1" 200 11733
+INFO 2025-07-13 00:57:48,286 basehttp 12160 16448 "GET / HTTP/1.1" 200 14283
+INFO 2025-07-13 00:57:51,294 basehttp 12160 16448 "GET /?parish=Evangeline HTTP/1.1" 200 7101
+INFO 2025-07-13 00:57:54,868 basehttp 12160 16448 "GET /?parish= HTTP/1.1" 200 14283
+INFO 2025-07-13 00:57:58,812 basehttp 12160 16448 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-07-13 00:57:59,017 basehttp 12160 16448 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4181
+INFO 2025-07-13 00:57:59,095 basehttp 12160 16448 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,095 basehttp 12160 11764 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,099 basehttp 12160 18596 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,099 basehttp 12160 17032 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,099 basehttp 12160 14604 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,693 basehttp 12160 14604 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-07-13 00:57:59,693 basehttp 12160 17032 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+WARNING 2025-07-13 00:58:00,134 log 12160 17032 Not Found: /favicon.ico
+WARNING 2025-07-13 00:58:00,134 basehttp 12160 17032 "GET /favicon.ico HTTP/1.1" 404 2462
+INFO 2025-07-13 00:58:12,174 basehttp 12160 17032 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-07-13 00:58:12,283 basehttp 12160 17032 "GET /admin/ HTTP/1.1" 200 6252
+INFO 2025-07-13 00:58:12,416 basehttp 12160 17032 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-13 00:58:12,585 basehttp 12160 14604 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-13 00:58:12,587 basehttp 12160 17032 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
