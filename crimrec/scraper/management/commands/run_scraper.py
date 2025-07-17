@@ -3,6 +3,7 @@ from scraper.scrapers import EClerksScraper
 from scraper.models import CriminalRecord
 from django.utils.timezone import now
 import logging
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,7 @@ class Command(BaseCommand):
             '--to-date',
             type=str,
             help='End date for search (MM/DD/YYYY)',
-            default=None
+            default=datetime.now().strftime('%m/%d/%Y')
         )
         parser.add_argument(
             '--max-pages',
@@ -28,31 +29,42 @@ class Command(BaseCommand):
             help='Maximum number of pages to scrape',
             default=1
         )
+        parser.add_argument(
+            '--headless',
+            action='store_true',
+            help='Run browser in headless mode'
+        )
 
     def handle(self, *args, **options):
+        self.stdout.write(self.style.SUCCESS('Starting criminal records scraper...'))
+        
         try:
-            scraper = EClerksScraper(headless=False)
-            records = scraper.run(
+            scraper = EClerksScraper(headless=options['headless'])
+            
+            # Get initial record count
+            initial_count = CriminalRecord.objects.count()
+            
+            success = scraper.run(
                 from_date=options['from_date'],
                 to_date=options['to_date'],
                 max_pages=options['max_pages']
             )
             
-            saved_count = 0
-            for record in records:
-                try:
-                    CriminalRecord.objects.update_or_create(
-                        case_number=record['case_number'],
-                        defaults=record
-                    )
-                    saved_count += 1
-                except Exception as e:
-                    logger.error(f"Error saving record {record['case_number']}: {str(e)}")
-                    continue
-            
-            self.stdout.write(self.style.SUCCESS(
-                f"Successfully processed {len(records)} records. Saved/updated {saved_count} records."
-            ))
+            if success:
+                # Get final record count and records scraped
+                final_count = CriminalRecord.objects.count()
+                records_added = final_count - initial_count
+                total_records_scraped = len(scraper.records)
+                
+                self.stdout.write(self.style.SUCCESS(
+                    f"Scraping completed successfully!\n"
+                    f"Records scraped: {total_records_scraped}\n"
+                    f"Records added to database: {records_added}\n"
+                    f"Total records in database: {final_count}"
+                ))
+            else:
+                self.stdout.write(self.style.ERROR("Scraping failed. Check logs for details."))
+                
         except Exception as e:
             logger.error(f"Scraper command failed: {str(e)}")
             self.stdout.write(self.style.ERROR(f"Error: {str(e)}"))
